@@ -29,6 +29,8 @@ class UTips extends StatefulWidget {
 }
 
 class _UTipsState extends State<UTips> {
+  int _personCount = 1;
+
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
@@ -36,6 +38,21 @@ class _UTipsState extends State<UTips> {
       fontWeight: FontWeight.bold,
       color: theme.colorScheme.primary,
     );
+
+    void increment() {
+      setState(() {
+        _personCount = _personCount + 1;
+      });
+    }
+
+    void decrement() {
+      setState(() {
+        if (_personCount > 1) {
+          _personCount = _personCount - 1;
+        }
+      });
+    }
+
     return Scaffold(
       appBar: AppBar(title: Text('Universally Useful Tips'), centerTitle: true),
       body: Column(
@@ -73,8 +90,34 @@ class _UTipsState extends State<UTips> {
                     keyboardType: TextInputType.numberWithOptions(
                       decimal: true,
                     ),
+                    onChanged: (String value) {},
                   ),
-                
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("Split", style: theme.textTheme.titleMedium),
+                      Row(
+                        children: [
+                          IconButton(
+                            color: theme.colorScheme.primary,
+
+                            onPressed: decrement,
+                            icon: Icon(Icons.remove),
+                          ),
+                          Text(
+                            "$_personCount",
+                            style: theme.textTheme.titleMedium,
+                          ),
+                          IconButton(
+                            color: theme.colorScheme.primary,
+                            onPressed: increment,
+                            icon: Icon(Icons.add),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
