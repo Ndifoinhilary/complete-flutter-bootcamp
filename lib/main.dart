@@ -12,7 +12,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const Color.fromARGB(255, 5, 78, 214),
+        ),
       ),
       home: const UTips(),
     );
@@ -29,21 +31,26 @@ class UTips extends StatefulWidget {
 class _UTipsState extends State<UTips> {
   @override
   Widget build(BuildContext context) {
+    var theme = Theme.of(context);
+    final style = Theme.of(context).textTheme.titleMedium!.copyWith(
+      fontWeight: FontWeight.bold,
+      color: theme.colorScheme.primary,
+    );
     return Scaffold(
       appBar: AppBar(title: Text('Universally Useful Tips'), centerTitle: true),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Container(
-            alignment: Alignment.center,
             padding: EdgeInsets.all(16),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
-              color: Colors.deepPurple,
+              color: Theme.of(context).colorScheme.inversePrimary,
             ),
             child: Column(
               children: [
-                Text("Column running here"),
-                Text("20")
+                Text("Total per Person", style: style),
+                Text("\$20", style: style.copyWith(fontSize: 24)),
               ],
             ),
           ),
