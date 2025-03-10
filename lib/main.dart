@@ -31,6 +31,8 @@ class UTips extends StatefulWidget {
 class _UTipsState extends State<UTips> {
   int _personCount = 1;
 
+  double _tipPercentage = 0;
+
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
@@ -57,9 +59,10 @@ class _UTipsState extends State<UTips> {
       appBar: AppBar(title: Text('Universally Useful Tips'), centerTitle: true),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
+
         children: [
           Container(
-            padding: EdgeInsets.all(16),
+            padding: EdgeInsets.all(20),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               color: Theme.of(context).colorScheme.inversePrimary,
@@ -73,8 +76,9 @@ class _UTipsState extends State<UTips> {
           ),
 
           Padding(
-            padding: const EdgeInsets.all(18),
+            padding: const EdgeInsets.all(20),
             child: Container(
+              padding: EdgeInsets.all(20),
               margin: EdgeInsets.only(top: 20),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(5),
@@ -86,6 +90,7 @@ class _UTipsState extends State<UTips> {
                     decoration: InputDecoration(
                       prefixIcon: Icon(Icons.money),
                       label: Text("Enter money to share"),
+                      border: OutlineInputBorder(),
                     ),
                     keyboardType: TextInputType.numberWithOptions(
                       decimal: true,
@@ -117,6 +122,29 @@ class _UTipsState extends State<UTips> {
                         ],
                       ),
                     ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("Tips", style: style),
+                      Text("\$20", style: style),
+                    ],
+                  ),
+                  Text(
+                    "${(_tipPercentage * 100).round()} %",
+                    style: style.copyWith(fontSize: 12),
+                  ),
+                  Slider(
+                    value: _tipPercentage,
+                    onChanged:
+                        (value) => {
+                          setState(() {
+                            _tipPercentage = value;
+                          }),
+                        },
+                    min: 0.0,
+                    max: 0.7,
+                    label: "Percentage",
                   ),
                 ],
               ),
