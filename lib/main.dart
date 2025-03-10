@@ -54,6 +54,31 @@ class _UTipsState extends State<UTips> {
               ],
             ),
           ),
+
+          Padding(
+            padding: const EdgeInsets.all(18),
+            child: Container(
+              margin: EdgeInsets.only(top: 20),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5),
+                border: Border.all(color: theme.colorScheme.primary, width: 2),
+              ),
+              child: Column(
+                children: [
+                  TextField(
+                    decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.money),
+                      label: Text("Enter money to share"),
+                    ),
+                    keyboardType: TextInputType.numberWithOptions(
+                      decimal: true,
+                    ),
+                  ),
+                
+                ],
+              ),
+            ),
+          ),
         ],
       ),
     );
